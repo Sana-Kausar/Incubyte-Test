@@ -40,4 +40,15 @@ public class CalculatorTest {
   public void newLineDelimiterCheck() {
 	  assertEquals(6, Calculator.add("1,2\n3"));
   }
+  
+  //should throw exception with list of negative numbers if given
+  
+  @Test
+  public void negativeNumbersCheck() {
+	  try {
+		  Calculator.add("1,-2,-3");
+	  }catch(RuntimeException e) {
+		  assertEquals("Negative numbers are not allowed: -2,-3", e.getMessage());
+	  }
+  }
 }
