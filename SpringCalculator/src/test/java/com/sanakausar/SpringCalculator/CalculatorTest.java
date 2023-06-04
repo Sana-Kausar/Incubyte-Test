@@ -51,4 +51,11 @@ public class CalculatorTest {
 		  assertEquals("Negative numbers are not allowed: -2,-3", e.getMessage());
 	  }
   }
+  
+  //should allow custom delimiter
+  
+  @Test
+  public void customDelimiterCheck() {
+	  assertEquals(4, Calculator.add("//*\n2*2"));
+  }
 }

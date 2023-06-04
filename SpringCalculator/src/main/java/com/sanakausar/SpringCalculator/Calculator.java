@@ -1,6 +1,8 @@
 package com.sanakausar.SpringCalculator;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Calculator {
 
@@ -14,6 +16,8 @@ public class Calculator {
 	private static String[] splitNumbers(String numbers) {
 		if(numbers.isEmpty()) {
 			return new String[0];
+		}else if(numbers.startsWith("//")) {
+			return customDelimiterSplit(numbers);
 		}
 		String[] num=numbers.split(",|\n");
 		return num;
@@ -37,5 +41,13 @@ public class Calculator {
 		if(neg.size()>0) {
 			throw new RuntimeException("Negative numbers are not allowed: " + String.join(",", neg));
 		}
+	}
+	
+	private static String[] customDelimiterSplit(String numbers){
+		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(numbers);
+		m.matches();
+		String customDelimiter=m.group(1);
+		String num=m.group(2);
+		return num.split(Pattern.quote(customDelimiter));
 	}
 }
